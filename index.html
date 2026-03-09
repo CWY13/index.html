@@ -14,12 +14,12 @@
         .input-group { margin-bottom: 15px; text-align: left; }
         label { display: block; font-weight: bold; margin-bottom: 5px; font-size: 14px; color: #333; }
         input, select { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 10px; box-sizing: border-box; font-size: 16px; outline: none; }
+        /* Resaltamos el campo de contraseña para que no se pierda */
+        .pass-field { border: 2px solid #d32f2f80 !important; }
         button { width: 100%; padding: 14px; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; margin-top: 10px; font-size: 16px; transition: 0.3s; }
         .btn-main { background: var(--rojo); color: white; }
         .btn-outline { background: none; border: 1px solid var(--rojo); color: var(--rojo); }
         .btn-whatsapp { background: var(--verde); color: white; text-decoration: none; display: flex; align-items: center; justify-content: center; padding: 15px; border-radius: 12px; font-weight: bold; margin-top: 20px; }
-        .status-box { background: #e8f5e9; color: #2e7d32; padding: 12px; border-radius: 10px; font-weight: bold; margin: 15px 0; border: 1px solid #c8e6c9; }
-        .info-list { text-align: left; background: #f9f9f9; padding: 15px; border-radius: 10px; font-size: 13px; }
         .footer-links { text-align: center; margin-top: 20px; font-size: 14px; border-top: 1px solid #eee; padding-top: 15px; }
         .footer-links a { color: #1877f2; text-decoration: none; cursor: pointer; display: block; margin-bottom: 10px; }
     </style>
@@ -47,82 +47,6 @@
     </div>
 
     <div id="register-box" class="hidden">
-        <h3>Nuevo Registro</h3>
+        <h3 style="color:var(--rojo)">Registro de Piloto</h3>
         <form action="https://script.google.com/macros/s/AKfycbxgwpebtef9b0yTsC4XUfIhvHayqRNuAw4gerkBuS2Gf9kLbrQPB3GKi3ggg13x0LtG/exec" method="POST">
-            <div class="input-group">
-                <label>Nombre del Piloto</label>
-                <input type="text" name="nombre" placeholder="Nombre completo" required>
-            </div>
-            <div class="input-group">
-                <label>Teléfono (Será tu Usuario)</label>
-                <input type="tel" name="telefono" placeholder="33XXXXXXXX" required>
-            </div>
-            <div class="input-group">
-                <label>Crea una Contraseña</label>
-                <input type="password" name="password" placeholder="Mínimo 6 caracteres" required>
-            </div>
-            <div class="input-group">
-                <label>Plan de Cobertura</label>
-                <select name="plan">
-                    <option value="Plan 125 ($50)">Plan 125 - $50/mes</option>
-                    <option value="Plan 150 ($75)">Plan 150 - $75/mes</option>
-                    <option value="Plan 250 ($95)">Plan 250 - $95/mes</option>
-                </select>
-            </div>
-            <button type="submit" class="btn-main">Registrarme Ahora</button>
-        </form>
-        <button class="btn-outline" onclick="show('login-box')" style="margin-top:10px;">Volver</button>
-    </div>
-
-    <div id="forgot-box" class="hidden">
-        <h3>Recuperar Acceso</h3>
-        <p style="font-size: 12px;">Escribe tu número para enviarte tu clave por WhatsApp.</p>
-        <form action="https://script.google.com/macros/s/AKfycbxgwpebtef9b0yTsC4XUfIhvHayqRNuAw4gerkBuS2Gf9kLbrQPB3GKi3ggg13x0LtG/exec" method="POST">
-            <input type="hidden" name="nombre" value="RECUPERACION">
-            <input type="hidden" name="plan" value="RECOBRO">
-            <div class="input-group">
-                <label>Número de Teléfono</label>
-                <input type="tel" name="telefono" placeholder="33XXXXXXXX" required>
-            </div>
-            <button type="submit" class="btn-main">Solicitar Clave</button>
-        </form>
-        <button class="btn-outline" onclick="show('login-box')" style="margin-top:10px;">Volver</button>
-    </div>
-
-    <div id="socio-box" class="hidden">
-        <h2 style="color:var(--rojo);">¡Bienvenido Socio!</h2>
-        <div class="status-box">● Estatus: Cuenta Activa</div>
-        <div class="info-list">
-            <p>🏁 <b>Zona:</b> Tlajomulco</p>
-            <p>⛽ <b>Insumos:</b> Activos</p>
-            <p>🚛 <b>Remolque:</b> Activo</p>
-        </div>
-        <a href="https://wa.me/523319053634?text=Hola%20Cailewey,%20necesito%20asistencia%20vial" class="btn-whatsapp">
-            📲 PEDIR ASISTENCIA AHORA
-        </a>
-        <button class="btn-outline" onclick="location.reload()" style="margin-top:20px;">Cerrar Sesión</button>
-    </div>
-</div>
-
-<script>
-    function show(id) {
-        document.getElementById('login-box').classList.add('hidden');
-        document.getElementById('register-box').classList.add('hidden');
-        document.getElementById('forgot-box').classList.add('hidden');
-        document.getElementById('socio-box').classList.add('hidden');
-        document.getElementById(id).classList.remove('hidden');
-    }
-
-    function entrarComoSocio() {
-        var u = document.getElementById('userLogin').value;
-        var p = document.getElementById('passLogin').value;
-        if(u !== "" && p !== "") {
-            show('socio-box');
-        } else {
-            alert("Ingresa usuario y contraseña.");
-        }
-    }
-</script>
-
-</body>
-</html>
+            <div
