@@ -50,4 +50,80 @@
             </select>
             <button type="submit" class="btn-main">Registrarme Ahora</button>
         </form>
-        <button class="btn-outline" onclick="ver('sec-login')">Vol
+        <button class="btn-outline" onclick="ver('sec-login')">Volver al Inicio</button>
+    </div>
+
+    <div id="sec-olvido" class="hidden">
+        <h3>Recuperar Acceso</h3>
+        <p style="font-size:14px; color:#666;">Escribe tu número y te contactaremos para enviarte tu clave.</p>
+        <input type="tel" id="tel-recupera" placeholder="33XXXXXXXX">
+        <button class="btn-main" onclick="window.location.href='https://wa.me/523319053634?text=Hola,%20olvidé%20mi%20clave%20de%20socio'">Solicitar por WhatsApp</button>
+        <button class="btn-outline" onclick="ver('sec-login')">Volver</button>
+    </div>
+
+    <div id="sec-socio" class="hidden">
+        <h2 style="color:var(--rojo); margin:0;">¡Bienvenido Socio!</h2>
+        <div class="status-badge">● CUENTA ACTIVA</div>
+        <div style="text-align:left; font-size:14px; background:#f4f4f4; padding:15px; border-radius:10px;">
+            📍 <b>Zona:</b> Tlajomulco de Zúñiga<br>
+            ⛽ <b>Combustible:</b> Incluido en plan<br>
+            🚛 <b>Remolque:</b> Grúa disponible
+        </div>
+        <button class="btn-main" style="background:var(--rojo); margin-top:20px;" onclick="ver('sec-pedido')">🛠️ SOLICITAR ASISTENCIA</button>
+        <button class="btn-outline" onclick="location.reload()" style="margin-top:20px;">Cerrar Sesión</button>
+    </div>
+
+    <div id="sec-pedido" class="hidden">
+        <h3 style="color:var(--rojo)">¿Qué necesitas hoy?</h3>
+        <div class="opcion" onclick="this.querySelector('input').click()"><input type="checkbox" class="prod" value="Gasolina"> ⛽ Gasolina</div>
+        <div class="opcion" onclick="this.querySelector('input').click()"><input type="checkbox" class="prod" value="Ponchadura"> 🛞 Ponchadura</div>
+        <div class="opcion" onclick="this.querySelector('input').click()"><input type="checkbox" class="prod" value="Remolque"> 🚛 Remolque (Grúa)</div>
+        <div class="opcion" onclick="this.querySelector('input').click()"><input type="checkbox" class="prod" value="Falla Mecánica"> 🛠️ Falla Mecánica</div>
+
+        <div class="aviso">
+            <b>📍 PASO FINAL:</b><br>
+            Al presionar el botón se abrirá tu WhatsApp. Envía el mensaje y <b>mándanos tu ubicación real</b> con el icono del clip 📎.
+        </div>
+
+        <button class="btn-whatsapp" onclick="enviarWhatsApp()">✅ CONFIRMAR Y ENVIAR</button>
+        <button class="btn-outline" onclick="ver('sec-socio')">Regresar</button>
+    </div>
+</div>
+
+<script>
+    function ver(id) {
+        document.getElementById('sec-login').classList.add('hidden');
+        document.getElementById('sec-registro').classList.add('hidden');
+        document.getElementById('sec-olvido').classList.add('hidden');
+        document.getElementById('sec-socio').classList.add('hidden');
+        document.getElementById('sec-pedido').classList.add('hidden');
+        document.getElementById(id).classList.remove('hidden');
+    }
+
+    function entrar() {
+        var u = document.getElementById('user').value;
+        var p = document.getElementById('pass').value;
+        if(u !== "" && p !== "") { ver('sec-socio'); } 
+        else { alert("Escribe tu teléfono y contraseña."); }
+    }
+
+    function enviarWhatsApp() {
+        var checks = document.querySelectorAll('.prod:checked');
+        var seleccion = [];
+        checks.forEach((c) => { seleccion.push(c.value); });
+
+        if(seleccion.length === 0) {
+            alert("Por favor selecciona al menos un servicio.");
+            return;
+        }
+
+        var texto = "¡Hola Cailewey! Soy socio activo y necesito asistencia urgente.%0A%0A" + 
+                    "*REQUERIMIENTO:* " + seleccion.join(", ") + 
+                    "%0A%0A📍 *A continuación te comparto mi ubicación exacta...*";
+        
+        window.location.href = "https://wa.me/523319053634?text=" + texto;
+    }
+</script>
+
+</body>
+</html>
