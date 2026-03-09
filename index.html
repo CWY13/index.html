@@ -5,48 +5,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cailewey - Asistencia Vial</title>
     <style>
-        :root { --rojo: #d32f2f; --verde: #25d366; --gris: #f4f4f4; --blanco: #ffffff; }
-        body { font-family: 'Segoe UI', sans-serif; background: var(--gris); margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
-        .card { background: var(--blanco); width: 100%; max-width: 400px; padding: 25px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); border-top: 8px solid var(--rojo); text-align: center; }
-        h1 { color: var(--rojo); margin-bottom: 5px; font-size: 28px; }
-        .subtitle { font-size: 13px; color: #666; margin-bottom: 25px; }
-        .hidden { display: none; }
+        :root { --rojo: #d32f2f; --gris: #f4f4f4; }
+        body { font-family: sans-serif; background: var(--gris); display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
+        .card { background: white; width: 90%; max-width: 400px; padding: 25px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); border-top: 8px solid var(--rojo); text-align: center; }
         .input-group { margin-bottom: 15px; text-align: left; }
-        label { display: block; font-weight: bold; margin-bottom: 5px; font-size: 14px; color: #333; }
-        input, select { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 10px; box-sizing: border-box; font-size: 16px; outline: none; }
-        /* Resaltamos el campo de contraseña para que no se pierda */
-        .pass-field { border: 2px solid #d32f2f80 !important; }
-        button { width: 100%; padding: 14px; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; margin-top: 10px; font-size: 16px; transition: 0.3s; }
-        .btn-main { background: var(--rojo); color: white; }
-        .btn-outline { background: none; border: 1px solid var(--rojo); color: var(--rojo); }
-        .btn-whatsapp { background: var(--verde); color: white; text-decoration: none; display: flex; align-items: center; justify-content: center; padding: 15px; border-radius: 12px; font-weight: bold; margin-top: 20px; }
-        .footer-links { text-align: center; margin-top: 20px; font-size: 14px; border-top: 1px solid #eee; padding-top: 15px; }
-        .footer-links a { color: #1877f2; text-decoration: none; cursor: pointer; display: block; margin-bottom: 10px; }
+        label { display: block; font-weight: bold; margin-bottom: 5px; font-size: 14px; }
+        input, select { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 10px; box-sizing: border-box; font-size: 16px; }
+        .btn-main { width: 100%; padding: 14px; background: var(--rojo); color: white; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; font-size: 16px; }
+        .btn-outline { width: 100%; padding: 14px; background: none; border: 1px solid var(--rojo); color: var(--rojo); border-radius: 10px; margin-top: 10px; cursor: pointer; }
+        .hidden { display: none; }
     </style>
 </head>
 <body>
 
 <div class="card">
-    <h1>🏍️ Cailewey</h1>
-    <p class="subtitle">Asistencia Vial Tlajomulco</p>
+    <h1 style="color:var(--rojo); margin-bottom:0;">🏍️ Cailewey</h1>
+    <p style="font-size:12px; color:#666; margin-bottom:20px;">Asistencia Vial Tlajomulco</p>
 
-    <div id="login-box">
-        <div class="input-group">
-            <label>Teléfono (Usuario)</label>
-            <input type="text" id="userLogin" placeholder="33XXXXXXXX">
-        </div>
-        <div class="input-group">
-            <label>Contraseña</label>
-            <input type="password" id="passLogin" placeholder="••••••••">
-        </div>
-        <button class="btn-main" onclick="entrarComoSocio()">Entrar a mi Cuenta</button>
-        <div class="footer-links">
-            <a onclick="show('forgot-box')">¿Olvidaste tu contraseña?</a>
-            <button class="btn-outline" onclick="show('register-box')">Crear Cuenta Nueva</button>
-        </div>
-    </div>
-
-    <div id="register-box" class="hidden">
-        <h3 style="color:var(--rojo)">Registro de Piloto</h3>
+    <div id="register-box">
+        <h3>Nuevo Registro</h3>
         <form action="https://script.google.com/macros/s/AKfycbxgwpebtef9b0yTsC4XUfIhvHayqRNuAw4gerkBuS2Gf9kLbrQPB3GKi3ggg13x0LtG/exec" method="POST">
-            <div
+            <div class="input-group">
+                <label>Nombre Completo</label>
+                <input type="text" name="nombre" placeholder="Ej. Juan Pérez" required>
+            </div>
+            <div class="input-group">
+                <label>Teléfono (WhatsApp)</label>
+                <input type="tel" name="telefono" placeholder="33XXXXXXXX" required>
+            </div>
+            
+            <div class="input-group">
+                <label style="color:var(--rojo)">Crea tu Contraseña</label>
+                <input type="password" name="password" placeholder="Mínimo 6 caracteres" required>
+            </div>
+
+            <div class="input-group">
+                <label>Elige tu Plan</label>
+                <select name="plan">
+                    <option value="Plan 125 ($50)">Plan 125 - $50/mes</option>
+                    <option value="Plan 150 ($75)">Plan 150 - $75/mes</option>
+                    <option value="Plan 250 ($95)">Plan 250 - $95/mes</option>
+                </select>
+            </div>
+            <button type="submit" class="btn-main">Registrarme y Pagar</button>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>
