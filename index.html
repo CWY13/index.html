@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cailewey - Asistencia Vial</title>
+    <style>
+        body { font-family: sans-serif; background-color: #f0f2f5; padding: 20px; }
+        .container { max-width: 400px; margin: auto; background: white; padding: 25px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        h1 { color: #d32f2f; text-align: center; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; font-weight: bold; margin-bottom: 5px; }
+        input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
+        button { width: 100%; padding: 12px; background: #d32f2f; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; font-weight: bold; }
+        .plan { border: 1px solid #ddd; padding: 10px; margin-bottom: 10px; border-radius: 8px; }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏍️ Cailewey</h1>
+        <p style="text-align:center; font-size:12px;">Asistencia en Tlajomulco</p>
+
+        <form action="https://script.google.com/macros/s/AKfycby_9q3gCN9J4rha5RDPGhVr0fpahxJ5QE0jWeBedUVkJILom9glZIcl8SAc6zDbVtul/exec" method="POST">
+            <div class="form-group">
+                <label>Nombre del Piloto:</label>
+                <input type="text" name="nombre" placeholder="Tu nombre" required>
+            </div>
+            <div class="form-group">
+                <label>WhatsApp:</label>
+                <input type="tel" name="telefono" placeholder="33..." required>
+            </div>
+            <label>Selecciona tu Plan:</label>
+            <div class="plan">
+                <input type="radio" name="plan" value="Plan 125 ($50)" checked> Plan 125 - $50
+            </div>
+            <div class="plan">
+                <input type="radio" name="plan" value="Plan 150 ($75)"> Plan 150 - $75
+            </div>
+            <div class="plan">
+                <input type="radio" name="plan" value="Plan 250 ($95)"> Plan 250 - $95
+            </div>
+            <button type="submit">Registrarme Ahora</button>
+        </form>
+    </div>
+</body>
+</html>
