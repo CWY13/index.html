@@ -3,103 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cailewey</title>
+    <title>Cailewey - Asistencia Vial</title>
     <style>
-        body { font-family: sans-serif; background: #f4f4f4; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 15px; }
-        .card { background: white; width: 100%; max-width: 380px; padding: 25px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); border-top: 6px solid #d32f2f; text-align: center; box-sizing: border-box; }
+        :root { --rojo: #d32f2f; --verde: #25d366; --gris: #f4f4f4; --blanco: #ffffff; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--gris); margin: 0; padding: 15px; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        .card { background: var(--blanco); width: 100%; max-width: 400px; padding: 25px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-top: 8px solid var(--rojo); text-align: center; box-sizing: border-box; }
         .hidden { display: none !important; }
-        input, select { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; font-size: 16px; }
-        button { width: 100%; padding: 14px; background: #d32f2f; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 10px; font-size: 16px; }
-        .btn-verde { background: #25d366; text-decoration: none; display: block; padding: 15px; border-radius: 8px; color: white; margin-top: 20px; font-weight: bold; }
-        .btn-volver { background: none; border: 1px solid #d32f2f; color: #d32f2f; }
-        .opcion { text-align: left; background: #f9f9f9; padding: 10px; border-radius: 8px; margin-bottom: 10px; display: flex; align-items: center; }
-        .opcion input { width: auto; margin-right: 10px; }
+        h1 { color: var(--rojo); margin: 0; font-size: 28px; }
+        .subtitle { font-size: 12px; color: #666; margin-bottom: 20px; }
+        input, select { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ddd; border-radius: 10px; box-sizing: border-box; font-size: 16px; outline: none; }
+        button { width: 100%; padding: 15px; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; margin-top: 10px; font-size: 16px; transition: 0.3s; }
+        .btn-main { background: var(--rojo); color: white; }
+        .btn-outline { background: none; border: 1px solid var(--rojo); color: var(--rojo); }
+        .btn-whatsapp { background: var(--verde); color: white; text-decoration: none; display: block; padding: 15px; border-radius: 10px; font-weight: bold; margin-top: 15px; }
+        .opcion { text-align: left; background: #f9f9f9; padding: 12px; border-radius: 10px; margin-bottom: 8px; display: flex; align-items: center; cursor: pointer; border: 1px solid transparent; }
+        .opcion:hover { border-color: var(--rojo); }
+        .opcion input { width: auto; margin-right: 15px; transform: scale(1.4); }
+        .status-badge { background: #e8f5e9; color: #2e7d32; padding: 8px; border-radius: 8px; font-weight: bold; font-size: 14px; margin: 15px 0; }
+        .aviso { background: #fff9c4; border: 1px dashed #fbc02d; padding: 10px; border-radius: 8px; font-size: 13px; color: #616161; margin-top: 15px; }
     </style>
 </head>
 <body>
 
 <div class="card">
-    <h1 style="color:#d32f2f; margin:0;">🏍️ Cailewey</h1>
-    <p style="color:#666; font-size:12px; margin-bottom:20px;">Asistencia Vial Tlajomulco</p>
+    <h1>🏍️ Cailewey</h1>
+    <p class="subtitle">Asistencia Vial Tlajomulco</p>
 
-    <div id="login-sec">
-        <input type="text" id="u" placeholder="Teléfono (Usuario)">
-        <input type="password" id="p" placeholder="Contraseña">
-        <button onclick="entrar()">Entrar a mi Cuenta</button>
-        <button class="btn-volver" onclick="ver('reg-sec')">Crear Cuenta Nueva</button>
+    <div id="sec-login">
+        <input type="text" id="user" placeholder="Teléfono (Usuario)">
+        <input type="password" id="pass" placeholder="Contraseña">
+        <button class="btn-main" onclick="entrar()">Entrar a mi Cuenta</button>
+        <button class="btn-outline" onclick="ver('sec-registro')">Crear Cuenta Nueva</button>
+        <p><a href="#" onclick="ver('sec-olvido')" style="font-size:13px; color:#1877f2; text-decoration:none;">¿Olvidaste tu contraseña?</a></p>
     </div>
 
-    <div id="reg-sec" class="hidden">
+    <div id="sec-registro" class="hidden">
         <h3>Nuevo Registro</h3>
         <form action="https://script.google.com/macros/s/AKfycbxgwpebtef9b0yTsC4XUfIhvHayqRNuAw4gerkBuS2Gf9kLbrQPB3GKi3ggg13x0LtG/exec" method="POST">
             <input type="text" name="nombre" placeholder="Nombre completo" required>
-            <input type="tel" name="telefono" placeholder="Teléfono" required>
+            <input type="tel" name="telefono" placeholder="Teléfono (WhatsApp)" required>
             <input type="password" name="password" placeholder="Crea tu contraseña" required>
             <select name="plan">
-                <option value="125">Plan 125 ($50)</option>
-                <option value="150">Plan 150 ($75)</option>
-                <option value="250">Plan 250 ($95)</option>
+                <option value="Plan 125">Plan 125 ($50/mes)</option>
+                <option value="Plan 150">Plan 150 ($75/mes)</option>
+                <option value="Plan 250">Plan 250 ($95/mes)</option>
             </select>
-            <button type="submit">Finalizar Registro</button>
+            <button type="submit" class="btn-main">Registrarme Ahora</button>
         </form>
-        <button class="btn-volver" onclick="ver('login-sec')">Volver</button>
-    </div>
-
-    <div id="socio-sec" class="hidden">
-        <h2 style="color:#d32f2f">¡Bienvenido!</h2>
-        <div style="background:#e8f5e9; color:#2e7d32; padding:10px; border-radius:8px; font-weight:bold;">● ESTATUS: ACTIVO</div>
-        <p style="text-align:left; font-size:14px; margin-top:15px;">🏁 Zona: Tlajomulco<br>⛽ Insumos: Activos<br>🚛 Remolque: Activo</p>
-        <button class="btn-verde" onclick="ver('pedido-sec')">🛠️ SOLICITAR ASISTENCIA</button>
-        <button class="btn-volver" onclick="location.reload()" style="margin-top:20px;">Cerrar Sesión</button>
-    </div>
-
-    <div id="pedido-sec" class="hidden">
-        <h3 style="color:#d32f2f">¿Qué necesitas?</h3>
-        <p style="font-size:12px; color:#666;">Selecciona los servicios requeridos:</p>
-        
-        <div class="opcion"><input type="checkbox" class="serv" value="Gasolina"> ⛽ Gasolina</div>
-        <div class="opcion"><input type="checkbox" class="serv" value="Ponchadura"> 🛞 Ponchadura</div>
-        <div class="opcion"><input type="checkbox" class="serv" value="Remolque"> 🚛 Remolque (Grúa)</div>
-        <div class="opcion"><input type="checkbox" class="serv" value="Mecánico"> 🛠️ Falla Mecánica</div>
-        <div class="opcion"><input type="checkbox" class="serv" value="Paso de Corriente"> ⚡ Corriente</div>
-
-        <button class="btn-verde" onclick="enviarPedido()">📲 ENVIAR POR WHATSAPP</button>
-        <button class="btn-volver" onclick="ver('socio-sec')">Atrás</button>
-    </div>
-</div>
-
-<script>
-    function ver(id) {
-        document.getElementById('login-sec').classList.add('hidden');
-        document.getElementById('reg-sec').classList.add('hidden');
-        document.getElementById('socio-sec').classList.add('hidden');
-        document.getElementById('pedido-sec').classList.add('hidden');
-        document.getElementById(id).classList.remove('hidden');
-    }
-
-    function entrar() {
-        var user = document.getElementById('u').value;
-        var pass = document.getElementById('p').value;
-        if(user !== "" && pass !== "") {
-            ver('socio-sec');
-        } else {
-            alert("Escribe tus datos de acceso");
-        }
-    }
-
-    function enviarPedido() {
-        var checkboxes = document.querySelectorAll('.serv:checked');
-        var servicios = [];
-        checkboxes.forEach((cb) => { servicios.push(cb.value); });
-
-        if(servicios.length === 0) {
-            alert("Por favor selecciona al menos un servicio.");
-            return;
-        }
-
-        var mensaje = "¡Hola Cailewey! Soy socio y necesito asistencia.%0A%0A" + 
-                      "**Servicios solicitados:**%0A- " + servicios.join("%0A- ") + 
-                      "%0A%0A📍 **Mi ubicación actual:** (Presiona el botón de clip o ubicación en WhatsApp para enviármela)";
-        
-        // Esto abre WhatsApp con el mensaje listo
-        window.location.href =
+        <button class="btn-outline" onclick="ver('sec-login')">Vol
