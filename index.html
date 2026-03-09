@@ -10,7 +10,7 @@
         .hidden { display: none !important; }
         input { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; font-size: 16px; }
         button { width: 100%; padding: 14px; background: #d32f2f; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 10px; font-size: 16px; }
-        .btn-verde { background: #25d366; text-decoration: none; display: block; padding: 15px; border-radius: 8px; color: white; margin-top: 20px; }
+        .btn-verde { background: #25d366; text-decoration: none; display: block; padding: 15px; border-radius: 8px; color: white; margin-top: 20px; font-weight: bold; }
         .btn-volver { background: none; border: 1px solid #d32f2f; color: #d32f2f; }
     </style>
 </head>
@@ -20,22 +20,15 @@
     <h1 style="color:#d32f2f; margin:0;">🏍️ Cailewey</h1>
     <p style="color:#666; font-size:12px;">Asistencia Vial Tlajomulco</p>
 
-    <div id="login-section">
-        <input type="text" id="u" placeholder="Teléfono">
+    <div id="login-sec">
+        <input type="text" id="u" placeholder="Teléfono (Usuario)">
         <input type="password" id="p" placeholder="Contraseña">
         <button onclick="entrar()">Entrar a mi Cuenta</button>
-        <button class="btn-volver" onclick="irARegistro()">Crear Cuenta Nueva</button>
+        <button class="btn-volver" onclick="ver('reg-sec')">Crear Cuenta Nueva</button>
+        <p><a href="#" onclick="ver('forgot-sec')" style="font-size:12px; color:#666;">¿Olvidaste tu contraseña?</a></p>
     </div>
 
-    <div id="socio-section" class="hidden">
-        <h2 style="color:#d32f2f">¡Bienvenido!</h2>
-        <div style="background:#e8f5e9; color:#2e7d32; padding:10px; border-radius:5px; font-weight:bold; margin:15px 0;">● ESTATUS: ACTIVO</div>
-        <p style="text-align:left; font-size:14px;">📍 Zona: Tlajomulco<br>⛽ Gasolina: Incluida<br>🚛 Remolque: Activo</p>
-        <a href="https://wa.me/523319053634?text=Necesito%20asistencia" class="btn-verde">📲 PEDIR ASISTENCIA AHORA</a>
-        <button class="btn-volver" onclick="location.reload()" style="margin-top:20px;">Cerrar Sesión</button>
-    </div>
-
-    <div id="registro-section" class="hidden">
+    <div id="reg-sec" class="hidden">
         <h3>Nuevo Registro</h3>
         <form action="https://script.google.com/macros/s/AKfycbxgwpebtef9b0yTsC4XUfIhvHayqRNuAw4gerkBuS2Gf9kLbrQPB3GKi3ggg13x0LtG/exec" method="POST">
             <input type="text" name="nombre" placeholder="Nombre completo" required>
@@ -48,26 +41,43 @@
             </select>
             <button type="submit">Finalizar Registro</button>
         </form>
-        <button class="btn-volver" onclick="location.reload()">Volver</button>
+        <button class="btn-volver" onclick="ver('login-sec')">Volver</button>
+    </div>
+
+    <div id="forgot-sec" class="hidden">
+        <h3>Recuperar Cuenta</h3>
+        <p style="font-size:13px;">Ingresa tu número y te contactaremos.</p>
+        <input type="tel" placeholder="Tu teléfono">
+        <button onclick="window.location.href='https://wa.me/523319053634?text=Olvide%20mi%20clave'">Solicitar por WhatsApp</button>
+        <button class="btn-volver" onclick="ver('login-sec')">Volver</button>
+    </div>
+
+    <div id="socio-sec" class="hidden">
+        <h2 style="color:#d32f2f">¡Bienvenido!</h2>
+        <div style="background:#e8f5e9; color:#2e7d32; padding:10px; border-radius:8px; font-weight:bold;">● ESTATUS: ACTIVO</div>
+        <p style="text-align:left; font-size:14px; margin-top:15px;">🏁 Zona: Tlajomulco<br>⛽ Insumos: Activos<br>🚛 Remolque: Activo</p>
+        <a href="https://wa.me/523319053634?text=Necesito%20asistencia" class="btn-verde">📲 PEDIR ASISTENCIA AHORA</a>
+        <button class="btn-volver" onclick="location.reload()" style="margin-top:20px;">Cerrar Sesión</button>
     </div>
 </div>
 
 <script>
+    function ver(id) {
+        document.getElementById('login-sec').classList.add('hidden');
+        document.getElementById('reg-sec').classList.add('hidden');
+        document.getElementById('forgot-sec').classList.add('hidden');
+        document.getElementById('socio-sec').classList.add('hidden');
+        document.getElementById(id).classList.remove('hidden');
+    }
+
     function entrar() {
         var user = document.getElementById('u').value;
         var pass = document.getElementById('p').value;
-        
         if(user !== "" && pass !== "") {
-            document.getElementById('login-section').classList.add('hidden');
-            document.getElementById('socio-section').classList.remove('hidden');
+            ver('socio-sec');
         } else {
-            alert("Escribe tu teléfono y contraseña");
+            alert("Escribe tus datos de acceso");
         }
-    }
-
-    function irARegistro() {
-        document.getElementById('login-section').classList.add('hidden');
-        document.getElementById('registro-section').classList.remove('hidden');
     }
 </script>
 
