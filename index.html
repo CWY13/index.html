@@ -3,45 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cailewey - Asistencia Vial</title>
+    <title>Cailewey - Portal de Asistencia</title>
     <style>
-        body { font-family: sans-serif; background-color: #f0f2f5; padding: 20px; }
-        .container { max-width: 400px; margin: auto; background: white; padding: 25px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        h1 { color: #d32f2f; text-align: center; }
-        .form-group { margin-bottom: 15px; }
-        label { display: block; font-weight: bold; margin-bottom: 5px; }
-        input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
-        button { width: 100%; padding: 12px; background: #d32f2f; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; font-weight: bold; }
-        .plan { border: 1px solid #ddd; padding: 10px; margin-bottom: 10px; border-radius: 8px; }
+        :root { --rojo: #d32f2f; --verde: #25d366; --gris: #f4f4f4; }
+        body { font-family: 'Segoe UI', sans-serif; background: var(--gris); margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        .card { background: white; width: 100%; max-width: 400px; padding: 25px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); border-top: 8px solid var(--rojo); }
+        h1 { color: var(--rojo); text-align: center; margin-bottom: 5px; }
+        .subtitle { text-align: center; font-size: 12px; color: #666; margin-bottom: 25px; }
         .hidden { display: none; }
+        .input-group { margin-bottom: 15px; }
+        label { display: block; font-weight: bold; margin-bottom: 5px; font-size: 14px; }
+        input, select { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; font-size: 16px; }
+        button { width: 100%; padding: 14px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 10px; font-size: 16px; transition: 0.3s; }
+        .btn-main { background: var(--rojo); color: white; }
+        .btn-main:hover { background: #b71c1c; }
+        .btn-outline { background: none; border: 1px solid var(--rojo); color: var(--rojo); }
+        .footer-links { text-align: center; margin-top: 20px; font-size: 14px; }
+        .footer-links a { color: #1877f2; text-decoration: none; cursor: pointer; display: block; margin-bottom: 10px; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>🏍️ Cailewey</h1>
-        <p style="text-align:center; font-size:12px;">Asistencia en Tlajomulco</p>
 
-        <form action="https://script.google.com/macros/s/AKfycby_9q3gCN9J4rha5RDPGhVr0fpahxJ5QE0jWeBedUVkJILom9glZIcl8SAc6zDbVtul/exec" method="POST">
-            <div class="form-group">
-                <label>Nombre del Piloto:</label>
-                <input type="text" name="nombre" placeholder="Tu nombre" required>
-            </div>
-            <div class="form-group">
-                <label>WhatsApp:</label>
-                <input type="tel" name="telefono" placeholder="33..." required>
-            </div>
-            <label>Selecciona tu Plan:</label>
-            <div class="plan">
-                <input type="radio" name="plan" value="Plan 125 ($50)" checked> Plan 125 - $50
-            </div>
-            <div class="plan">
-                <input type="radio" name="plan" value="Plan 150 ($75)"> Plan 150 - $75
-            </div>
-            <div class="plan">
-                <input type="radio" name="plan" value="Plan 250 ($95)"> Plan 250 - $95
-            </div>
-            <button type="submit">Registrarme Ahora</button>
-        </form>
+<div class="card">
+    <h1>🏍️ Cailewey</h1>
+    <p class="subtitle">Asistencia Vial en Tlajomulco de Zúñiga</p>
+
+    <div id="login-box">
+        <div class="input-group">
+            <label>Nombre de Usuario</label>
+            <input type="text" id="user" placeholder="Tu nombre o teléfono">
+        </div>
+        <div class="input-group">
+            <label>Contraseña</label>
+            <input type="password" id="pass" placeholder="••••••••">
+        </div>
+        <button class="btn-main" onclick="irASocio()">Entrar a mi Cuenta</button>
+        
+        <div class="footer-links">
+            <a onclick="show('forgot-box')">¿Olvidaste tu contraseña?</a>
+            <hr style="border:0; border-top:1px solid #eee; margin: 15px 0;">
+            <button class="btn-outline" onclick="show('register-box')">Crear Cuenta Nueva</button>
+        </div>
     </div>
+
+    <div id="register-box" class="hidden">
+        <h3 style="text-align:center;">Nuevo Registro</h3>
+        <form action="https://script.google.com/macros/s/AKfycby_9q3gCN9J4rha5RDPGhVr0fpahxJ5QE0jWeBedUVkJILom9glZIcl8SAc6zDbVtul/exec" method="POST">
+            <div class="input-group">
+                <label>Nombre Completo</label>
+                <input type="text" name="nombre" placeholder="Ej. Juan Pérez" required>
+            </div>
+            <div class="input-group">
+                <label>Teléfono (WhatsApp)</label>
+                <input type="tel" name="telefono" placeholder="33XXXXXXXX" required>
+            </div>
+            <div class="input-group">
+                <label>Elige tu Plan</label>
+                <select name="plan">
+                    <option value="Plan 125 ($50)">Plan 125 - $50/mes</option>
+                    <option value="Plan 150 ($75)">Plan 150 - $75/mes</option>
+                    <option value="Plan 250 ($95)">Plan 250 - $95/mes</option>
+                </select>
+            </div>
+            <button type="submit" class="btn-main">Registrarme y Pagar</button>
+        </form>
+        <button class="btn-outline" onclick="show('login-box')" style="margin-top:10px;">Volver</button>
+    </div>
+
+    <div id="forgot-box" class="hidden">
+        <h3 style="text-align:center;">Recuperar Acceso</h3>
+        <p style="font-size: 13px; text-align: center;">Ingresa tu número registrado para enviarte tus datos de acceso.</p>
+        <form action="https://script.google.com/macros/s/AKfycby_9q3gCN9J4rha5RDPGhVr0fpahxJ5QE0jWeBedUVkJILom9glZIcl8SAc6zDbVtul/exec" method="POST">
+            <input type="hidden" name="nombre" value="SOLICITUD_RECUPERACION">
+            <input type="hidden" name="plan" value="RECOBRO_PASSWORD">
+            <div class="input-group">
+                <label>Número de Teléfono</label>
+                <input type="tel" name="telefono" placeholder="33XXXXXXXX" required>
+            </div>
+            <button type="submit" class="btn-main">Solicitar por WhatsApp</button>
+        </form>
+        <button class="btn-outline" onclick="show('login-box')" style="margin-top:10px;">Volver</button>
+    </div>
+</div>
+
+<script>
+    // Función para cambiar de "página" dentro de la misma tarjeta
+    function show(id) {
+        document.getElementById('login-box').classList.add('hidden');
+        document.getElementById('register-box').classList.add('hidden');
+        document.getElementById('forgot-box').classList.add('hidden');
+        document.getElementById(id).classList.remove('hidden');
+    }
+
+    // Función para simular el login y mandarlos a ver su plan
+    function irASocio() {
+        var u = document.getElementById('user').value;
+        var p = document.getElementById('pass').value;
+        if(u != "" && p != "") {
+            window.location.href = "socio.html";
+        } else {
+            alert("Por favor ingresa tu usuario y contraseña");
+        }
+    }
+</script>
+
 </body>
 </html>
