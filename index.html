@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cailewey</title>
+    <style>
+        body { font-family: sans-serif; background: #f4f4f4; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 15px; }
+        .card { background: white; width: 100%; max-width: 380px; padding: 25px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); border-top: 6px solid #d32f2f; text-align: center; }
+        .hidden { display: none !important; }
+        input { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; font-size: 16px; }
+        button { width: 100%; padding: 14px; background: #d32f2f; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 10px; font-size: 16px; }
+        .btn-verde { background: #25d366; text-decoration: none; display: block; padding: 15px; border-radius: 8px; color: white; margin-top: 20px; }
+        .btn-volver { background: none; border: 1px solid #d32f2f; color: #d32f2f; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h1 style="color:#d32f2f; margin:0;">🏍️ Cailewey</h1>
+    <p style="color:#666; font-size:12px;">Asistencia Vial Tlajomulco</p>
+
+    <div id="login-section">
+        <input type="text" id="u" placeholder="Teléfono">
+        <input type="password" id="p" placeholder="Contraseña">
+        <button onclick="entrar()">Entrar a mi Cuenta</button>
+        <button class="btn-volver" onclick="irARegistro()">Crear Cuenta Nueva</button>
+    </div>
+
+    <div id="socio-section" class="hidden">
+        <h2 style="color:#d32f2f">¡Bienvenido!</h2>
+        <div style="background:#e8f5e9; color:#2e7d32; padding:10px; border-radius:5px; font-weight:bold; margin:15px 0;">● ESTATUS: ACTIVO</div>
+        <p style="text-align:left; font-size:14px;">📍 Zona: Tlajomulco<br>⛽ Gasolina: Incluida<br>🚛 Remolque: Activo</p>
+        <a href="https://wa.me/523319053634?text=Necesito%20asistencia" class="btn-verde">📲 PEDIR ASISTENCIA AHORA</a>
+        <button class="btn-volver" onclick="location.reload()" style="margin-top:20px;">Cerrar Sesión</button>
+    </div>
+
+    <div id="registro-section" class="hidden">
+        <h3>Nuevo Registro</h3>
+        <form action="https://script.google.com/macros/s/AKfycbxgwpebtef9b0yTsC4XUfIhvHayqRNuAw4gerkBuS2Gf9kLbrQPB3GKi3ggg13x0LtG/exec" method="POST">
+            <input type="text" name="nombre" placeholder="Nombre completo" required>
+            <input type="tel" name="telefono" placeholder="Teléfono" required>
+            <input type="password" name="password" placeholder="Crea tu contraseña" required>
+            <select name="plan" style="width:100%; padding:12px; border-radius:8px; margin:8px 0;">
+                <option value="125">Plan 125 ($50)</option>
+                <option value="150">Plan 150 ($75)</option>
+                <option value="250">Plan 250 ($95)</option>
+            </select>
+            <button type="submit">Finalizar Registro</button>
+        </form>
+        <button class="btn-volver" onclick="location.reload()">Volver</button>
+    </div>
+</div>
+
+<script>
+    function entrar() {
+        var user = document.getElementById('u').value;
+        var pass = document.getElementById('p').value;
+        
+        if(user !== "" && pass !== "") {
+            document.getElementById('login-section').classList.add('hidden');
+            document.getElementById('socio-section').classList.remove('hidden');
+        } else {
+            alert("Escribe tu teléfono y contraseña");
+        }
+    }
+
+    function irARegistro() {
+        document.getElementById('login-section').classList.add('hidden');
+        document.getElementById('registro-section').classList.remove('hidden');
+    }
+</script>
+
+</body>
+</html>
