@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+<meta charset="UTF-8">
+<title>Cailewey Asistencia Vial</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#0f0f0f;
+color:white;
+margin:0;
+text-align:center;
+}
+
+header{
+background:black;
+padding:20px;
+}
+
+.container{
+background:#1d1d1d;
+width:380px;
+margin:auto;
+margin-top:20px;
+padding:20px;
+border-radius:10px;
+}
+
+input,select{
+width:92%;
+padding:10px;
+margin:6px;
+border-radius:6px;
+border:none;
+}
+
+button{
+width:95%;
+padding:12px;
+margin-top:10px;
+background:#00aaff;
+color:white;
+border:none;
+border-radius:6px;
+cursor:pointer;
+}
+
+.section{
+display:none;
+}
+
+#login{
+display:block;
+}
+
+a{
+color:#00aaff;
+cursor:pointer;
+display:block;
+margin-top:10px;
+}
+
+.servicio{
+background:#2a2a2a;
+padding:10px;
+margin:6px;
+border-radius:6px;
+text-align:left;
+}
+
+</style>
+
+<script>
+
+function mostrar(id){
+
+document.querySelectorAll(".section").forEach(s=>{
+s.style.display="none";
+});
+
+document.getElementById(id).style.display="block";
+
+}
+
+function login(){
+
+var telefono=document.getElementById("tel_login").value;
+
+localStorage.setItem("clienteTelefono",telefono);
+
+mostrar("panel");
+
+document.getElementById("clienteTel").innerText=telefono;
+
+}
+
+</script>
+
+</head>
+
+
+<body>
+
+<header>
+
+<h1>Cailewey</h1>
+<p>Tu amigo en asistencia vial para motocicletas</p>
+
+</header>
+
+
+<!-- LOGIN -->
+
+<div class="container section" id="login">
+
+<h2>Iniciar sesión</h2>
+
+<input id="tel_login" placeholder="Telefono">
+
+<input type="password" placeholder="Contraseña">
+
+<button onclick="login()">Entrar</button>
+
+<a onclick="mostrar('registro')">Crear cuenta</a>
+
+<a onclick="mostrar('recuperar')">Olvidé contraseña</a>
+
+</div>
+
+
+
+<!-- REGISTRO -->
+
+<div class="container section" id="registro">
+
+<h2>Registro</h2>
+
+<form method="POST"
+action="https://script.google.com/macros/s/AKfycbxM-Xlz8ymCNPXHWJvDtkIRdjiqZYQbewTN4vBvqnqmYLwAOkit7vbCYlDBCORDm2HR/exec">
+
+<input name="nombre" placeholder="Nombre" required>
+
+<input name="telefono" placeholder="Telefono" required>
+
+<input name="password" placeholder="Contraseña" required>
+
+<input name="servicio" value="Registro cliente" hidden>
+
+<input name="plan" value="N/A" hidden>
+
+<input name="ubicacion" value="N/A" hidden>
+
+<button type="submit">Registrarse</button>
+
+</form>
+
+<a onclick="mostrar('login')">Volver</a>
+
+</div>
+
+
+
+<!-- RECUPERAR CONTRASEÑA -->
+
+<div class="container section" id="recuperar">
+
+<h2>Recuperar contraseña</h2>
+
+<form method="POST"
+action="https://script.google.com/macros/s/AKfycbxM-Xlz8ymCNPXHWJvDtkIRdjiqZYQbewTN4vBvqnqmYLwAOkit7vbCYlDBCORDm2HR/exec">
+
+<input name="telefono" placeholder="Telefono registrado">
+
+<input name="servicio" value="Recuperar contraseña" hidden>
+
+<input name="nombre" value="N/A" hidden>
+
+<input name="plan" value="N/A" hidden>
+
+<input name="ubicacion" value="N/A" hidden>
+
+<button type="submit">Solicitar cambio</button>
+
+</form>
+
+<a onclick="mostrar('login')">Volver</a>
+
+</div>
+
+
+
+<!-- PANEL CLIENTE -->
+
+<div class="container section" id="panel">
+
+<h2>Panel del cliente</h2>
+
+<p>Teléfono: <span id="clienteTel"></span></p>
+
+<button onclick="mostrar('productos')">Ver productos</button>
+
+<button onclick="mostrar('asistencia')">Solicitar asistencia</button>
+
+<button onclick="mostrar('login')">Cerrar sesión</button>
+
+</div>
+
+
+
+<!-- PRODUCTOS -->
+
+<div class="container section" id="productos">
+
+<h2>Productos disponibles</h2>
+
+<p>Gasolina</p>
+<p>Aceite</p>
+<p>Parche</p>
+<p>Accesorios</p>
+<p>Remolque</p>
+
+<a onclick="mostrar('panel')">Volver</a>
+
+</div>
+
+
+
+<!-- SOLICITAR ASISTENCIA -->
+
+<div class="container section" id="asistencia">
+
+<h2>Solicitud de asistencia</h2>
+
+<form method="POST"
+action="https://script.google.com/macros/s/AKfycbxM-Xlz8ymCNPXHWJvDtkIRdjiqZYQbewTN4vBvqnqmYLwAOkit7vbCYlDBCORDm2HR/exec">
+
+<input name="nombre" placeholder="Nombre">
+
+<input name="telefono" placeholder="Telefono">
+
+<select name="plan">
+
+<option>Plan 125</option>
+<option>Plan 150</option>
+<option>Plan 250</option>
+
+</select>
+
+<div class="servicio">
+<input type="checkbox" name="servicio" value="Gasolina"> Gasolina
+</div>
+
+<div class="servicio">
+<input type="checkbox" name="servicio" value="Aceite"> Aceite
+</div>
+
+<div class="servicio">
+<input type="checkbox" name="servicio" value="Parche"> Parche
+</div>
+
+<div class="servicio">
+<input type="checkbox" name="servicio" value="Accesorio"> Accesorio
+</div>
+
+<div class="servicio">
+<input type="checkbox" name="servicio" value="Remolque"> Remolque
+</div>
+
+<input name="ubicacion" placeholder="Ubicación">
+
+<button type="submit">Pedir asistencia</button>
+
+</form>
+
+<a onclick="mostrar('panel')">Volver</a>
+
+</div>
+
+
+</body>
+  </html>
