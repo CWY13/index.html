@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cailewey - Asistencia Vial</title>
+    <style>
+        :root { --rojo: #d32f2f; --verde: #25d366; --gris: #f4f4f4; --blanco: #ffffff; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--gris); margin: 0; padding: 15px; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        .card { background: var(--blanco); width: 100%; max-width: 400px; padding: 25px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-top: 8px solid var(--rojo); text-align: center; box-sizing: border-box; }
+        .hidden { display: none !important; }
+        h1 { color: var(--rojo); margin: 0; font-size: 28px; }
+        .subtitle { font-size: 12px; color: #666; margin-bottom: 20px; }
+        input, select { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ddd; border-radius: 10px; box-sizing: border-box; font-size: 16px; outline: none; }
+        button { width: 100%; padding: 15px; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; margin-top: 10px; font-size: 16px; transition: 0.3s; }
+        .btn-main { background: var(--rojo); color: white; }
+        .btn-outline { background: none; border: 1px solid var(--rojo); color: var(--rojo); }
+        .btn-whatsapp { background: var(--verde); color: white; text-decoration: none; display: block; padding: 15px; border-radius: 10px; font-weight: bold; margin-top: 15px; }
+        .opcion { text-align: left; background: #f9f9f9; padding: 12px; border-radius: 10px; margin-bottom: 8px; display: flex; align-items: center; cursor: pointer; border: 1px solid transparent; }
+        .opcion:hover { border-color: var(--rojo); }
+        .opcion input { width: auto; margin-right: 15px; transform: scale(1.4); }
+        .status-badge { background: #e8f5e9; color: #2e7d32; padding: 8px; border-radius: 8px; font-weight: bold; font-size: 14px; margin: 15px 0; }
+        .aviso { background: #fff9c4; border: 1px dashed #fbc02d; padding: 10px; border-radius: 8px; font-size: 13px; color: #616161; margin-top: 15px; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h1>🏍️ Cailewey</h1>
+    <p class="subtitle">Asistencia Vial Tlajomulco</p>
+
+    <div id="sec-login">
+        <input type="text" id="user" placeholder="Teléfono (Usuario)">
+        <input type="password" id="pass" placeholder="Contraseña">
+        <button class="btn-main" onclick="entrar()">Entrar a mi Cuenta</button>
+        <button class="btn-outline" onclick="ver('sec-registro')">Crear Cuenta Nueva</button>
+        <p><a href="#" onclick="ver('sec-olvido')" style="font-size:13px; color:#1877f2; text-decoration:none;">¿Olvidaste tu contraseña?</a></p>
+    </div>
+
+    <div id="sec-registro" class="hidden">
+        <h3>Nuevo Registro</h3>
+        <form action="https://script.google.com/macros/s/AKfycbxgwpebtef9b0yTsC4XUfIhvHayqRNuAw4gerkBuS2Gf9kLbrQPB3GKi3ggg13x0LtG/exec" method="POST">
+            <input type="text" name="nombre" placeholder="Nombre completo" required>
+            <input type="tel" name="telefono" placeholder="Teléfono (WhatsApp)" required>
+            <input type="password" name="password" placeholder="Crea tu contraseña" required>
+            <select name="plan">
+                <option value="Plan 125">Plan 125 ($50/mes)</option>
+                <option value="Plan 150">Plan 150 ($75/mes)</option>
+                <option value="Plan 250">Plan 250 ($95/mes)</option>
+            </select>
+            <button type="submit" class="btn-main">Registrarme Ahora</button>
+        </form>
+        <button class="btn-outline" onclick="ver('sec-login')">Volver al Inicio</button>
+    </div>
+
+    <div id="sec-olvido" class="hidden">
+        <h3>Recuperar Acceso</h3>
+        <p style="font-size:14px; color:#666;">Escribe tu número y te contactaremos para enviarte tu clave.</p>
+        <input type="tel" id="tel-recupera" placeholder="33XXXXXXXX">
+        <button class="btn-main" onclick="window.location.href='https://wa.me/523319053634?text=Hola,%20olvidé%20mi%20clave%20de%20socio'">Solicitar por WhatsApp</button>
+        <button class="btn-outline" onclick="ver('sec-login')">Volver</button>
+    </div>
+
+    <div id="sec-socio" class="hidden">
+        <h2 style="color:var(--rojo); margin:0;">¡Bienvenido Socio!</h2>
+        <div class="status-badge">● CUENTA ACTIVA</div>
+        <div style="text-align:left; font-size:14px; background:#f4f4f4; padding:15px; border-radius:10px;">
+            📍 <b>Zona:</b> Tlajomulco de Zúñiga<br>
+            ⛽ <b>Combustible:</b> Incluido en plan<br>
+            🚛 <b>Remolque:</b> Grúa disponible
+        </div>
+        <button class="btn-main" style="background:var(--rojo); margin-top:20px;" onclick="ver('sec-pedido')">🛠️ SOLICITAR ASISTENCIA</button>
+        <button class="btn-outline" onclick="location.reload()" style="margin-top:20px;">Cerrar Sesión</button>
+    </div>
+
+    <div id="sec-pedido" class="hidden">
+        <h3 style="color:var(--rojo)">¿Qué necesitas hoy?</h3>
+        <div class="opcion" onclick="this.querySelector('input').click()"><input type="checkbox" class="prod" value="Gasolina"> ⛽ Gasolina</div>
+        <div class="opcion" onclick="this.querySelector('input').click()"><input type="checkbox" class="prod" value="Ponchadura"> 🛞 Ponchadura</div>
+        <div class="opcion" onclick="this.querySelector('input').click()"><input type="checkbox" class="prod" value="Remolque"> 🚛 Remolque (Grúa)</div>
+        <div class="opcion" onclick="this.querySelector('input').click()"><input type="checkbox" class="prod" value="Falla Mecánica"> 🛠️ Falla Mecánica</div>
+
+        <div class="aviso">
+            <b>📍 PASO FINAL:</b><br>
+            Al presionar el botón se abrirá tu WhatsApp. Envía el mensaje y <b>mándanos tu ubicación real</b> con el icono del clip 📎.
+        </div>
+
+        <button class="btn-whatsapp" onclick="enviarWhatsApp()">✅ CONFIRMAR Y ENVIAR</button>
+        <button class="btn-outline" onclick="ver('sec-socio')">Regresar</button>
+    </div>
+</div>
+
+<script>
+    function ver(id) {
+        document.getElementById('sec-login').classList.add('hidden');
+        document.getElementById('sec-registro').classList.add('hidden');
+        document.getElementById('sec-olvido').classList.add('hidden');
+        document.getElementById('sec-socio').classList.add('hidden');
+        document.getElementById('sec-pedido').classList.add('hidden');
+        document.getElementById(id).classList.remove('hidden');
+    }
+
+    function entrar() {
+        var u = document.getElementById('user').value;
+        var p = document.getElementById('pass').value;
+        if(u !== "" && p !== "") { ver('sec-socio'); } 
+        else { alert("Escribe tu teléfono y contraseña."); }
+    }
+
+    function enviarWhatsApp() {
+        var checks = document.querySelectorAll('.prod:checked');
+        var seleccion = [];
+        checks.forEach((c) => { seleccion.push(c.value); });
+
+        if(seleccion.length === 0) {
+            alert("Por favor selecciona al menos un servicio.");
+            return;
+        }
+
+        var texto = "¡Hola Cailewey! Soy socio activo y necesito asistencia urgente.%0A%0A" + 
+                    "*REQUERIMIENTO:* " + seleccion.join(", ") + 
+                    "%0A%0A📍 *A continuación te comparto mi ubicación exacta...*";
+        
+        window.location.href = "https://wa.me/523319053634?text=" + texto;
+    }
+</script>
+
+</body>
+</html>
