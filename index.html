@@ -3,7 +3,7 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <title>Cailewey Asistencia Vial</title>
 
@@ -47,13 +47,6 @@ font-weight:bold;
 display:none;
 }
 
-.plan{
-border:1px solid #444;
-padding:10px;
-margin:10px;
-border-radius:10px;
-}
-
 </style>
 
 </head>
@@ -73,7 +66,6 @@ Cailewey Asistencia Vial para Motocicletas
 <h2>Iniciar sesión</h2>
 
 <input id="loginTelefono" placeholder="Telefono">
-
 <input id="loginPassword" type="password" placeholder="Contraseña">
 
 <button onclick="login()">Entrar</button>
@@ -81,8 +73,7 @@ Cailewey Asistencia Vial para Motocicletas
 <br><br>
 
 <button onclick="mostrarRegistro()">Crear Cuenta</button>
-
-<button onclick="mostrarRecuperar()">Olvide contraseña</button>
+<button onclick="mostrarRecuperar()">Olvidé contraseña</button>
 
 </div>
 
@@ -93,39 +84,32 @@ Cailewey Asistencia Vial para Motocicletas
 <h2>Registro</h2>
 
 <input id="nombre" placeholder="Nombre">
-
 <input id="telefono" placeholder="Telefono">
-
 <input id="password" type="password" placeholder="Contraseña">
 
 <select id="plan">
 
 <option>Plan 125 ($50 mensual)</option>
-
 <option>Plan 150 ($75 mensual)</option>
-
 <option>Plan 250 ($95 mensual)</option>
 
 </select>
 
 <button onclick="registrar()">Registrar</button>
-
 <button onclick="volver()">Volver</button>
 
 </div>
 
-<!-- RECUPERAR PASSWORD -->
+<!-- RECUPERAR -->
 
 <div id="recuperar" class="hidden">
 
 <h2>Recuperar contraseña</h2>
 
 <input id="telefonoRecuperar" placeholder="Telefono">
-
 <input id="nuevoPassword" type="password" placeholder="Nueva contraseña">
 
-<button onclick="recuperar()">Actualizar contraseña</button>
-
+<button onclick="recuperar()">Cambiar contraseña</button>
 <button onclick="volver()">Volver</button>
 
 </div>
@@ -134,143 +118,4 @@ Cailewey Asistencia Vial para Motocicletas
 
 <div id="panel" class="hidden">
 
-<h2>Solicitar asistencia</h2>
-
-<select id="servicio">
-
-<option>Gasolina</option>
-
-<option>Aceite</option>
-
-<option>Parche</option>
-
-<option>Accesorio</option>
-
-<option>Remolque</option>
-
-</select>
-
-<input id="ubicacion" placeholder="Ubicación automática">
-
-<button onclick="asistencia()">Pedir asistencia</button>
-
-<br><br>
-
-<button onclick="logout()">Cerrar sesión</button>
-
-</div>
-
-</div>
-
-<script>
-
-const url="https://script.google.com/macros/s/AKfycbyn-q_jNzeh9tLR-e-3FVWt8JqJUfu95ZF6kSlnzAi1rEUix6PKis30cWzJucSM5Zzx/exec"
-
-function mostrarRegistro(){
-
-document.getElementById("login").style.display="none"
-document.getElementById("registro").style.display="block"
-
-}
-
-function mostrarRecuperar(){
-
-document.getElementById("login").style.display="none"
-document.getElementById("recuperar").style.display="block"
-
-}
-
-function volver(){
-
-location.reload()
-
-}
-
-function registrar(){
-
-fetch(url,{
-method:"POST",
-body:new URLSearchParams({
-
-accion:"registro",
-nombre:document.getElementById("nombre").value,
-telefono:document.getElementById("telefono").value,
-password:document.getElementById("password").value,
-plan:document.getElementById("plan").value
-
-})
-})
-
-alert("Cuenta creada")
-
-location.reload()
-
-}
-
-function login(){
-
-document.getElementById("login").style.display="none"
-document.getElementById("panel").style.display="block"
-
-}
-
-function recuperar(){
-
-fetch(url,{
-method:"POST",
-body:new URLSearchParams({
-
-accion:"recuperar",
-telefono:document.getElementById("telefonoRecuperar").value,
-password:document.getElementById("nuevoPassword").value
-
-})
-})
-
-alert("Contraseña actualizada")
-
-location.reload()
-
-}
-
-function asistencia(){
-
-fetch(url,{
-method:"POST",
-body:new URLSearchParams({
-
-accion:"asistencia",
-servicio:document.getElementById("servicio").value,
-ubicacion:document.getElementById("ubicacion").value
-
-})
-})
-
-alert("Asistencia solicitada")
-
-}
-
-function logout(){
-
-location.reload()
-
-}
-
-if (navigator.geolocation){
-
-navigator.geolocation.getCurrentPosition(function(pos){
-
-let lat = pos.coords.latitude
-let lon = pos.coords.longitude
-
-document.getElementById("ubicacion").value =
-lat + "," + lon
-
-})
-
-}
-
-</script>
-
-</body>
-  </html>
+<h2
