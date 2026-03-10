@@ -1,121 +1,374 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cailewey - Asistencia Vial</title>
+    <style>
+        /* ESTILOS VISUALES EXACTOS DE LA FOTO */
+        :root {
+            --rojo-cailewey: #d32f2f; /* El rojo exacto de la marca */
+            --gris-fondo: #f4f4f4; /* Fondo gris claro */
+            --blanco: #ffffff;
+            --texto-oscuro: #333333;
+            --texto-suave: #666666;
+            --verde-whatsapp: #25d366;
+        }
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Tipografía limpia */
+            background-color: var(--gris-fondo);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
 
-<title>Cailewey Asistencia Vial</title>
+        .card {
+            background-color: var(--blanco);
+            width: 100%;
+            max-width: 400px; /* Ancho de la tarjeta */
+            padding: 30px;
+            border-radius: 20px; /* Bordes muy redondeados */
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1); /* Sombra suave */
+            border-top: 10px solid var(--rojo-cailewey); /* Borde rojo grueso superior */
+            text-align: center;
+            box-sizing: border-box;
+            position: relative;
+        }
 
-<style>
+        .hidden {
+            display: none !important;
+        }
 
-body{
-font-family:Arial;
-background:#111;
-color:white;
-text-align:center;
-margin:0;
-}
+        /* LOGO Y TÍTULOS */
+        .logo-container {
+            margin-bottom: 5px;
+        }
 
-header{
-background:#ff6600;
-padding:20px;
-font-size:22px;
-font-weight:bold;
-}
+        .logo-moto {
+            font-size: 24px;
+            vertical-align: middle;
+            margin-right: 5px;
+        }
 
-.container{
-padding:20px;
-}
+        .brand-name {
+            color: var(--rojo-cailewey);
+            font-size: 32px;
+            font-weight: bold;
+            margin: 0;
+            display: inline-block;
+            vertical-align: middle;
+        }
 
-input,select,button{
-width:90%;
-padding:12px;
-margin:8px;
-border:none;
-border-radius:6px;
-font-size:16px;
-}
+        .subtitle {
+            font-size: 13px;
+            color: var(--texto-suave);
+            margin-top: 5px;
+            margin-bottom: 25px;
+        }
 
-button{
-background:#ff6600;
-color:white;
-font-weight:bold;
-}
+        h3 {
+            color: var(--texto-oscuro);
+            font-size: 18px;
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
 
-.hidden{
-display:none;
-}
+        /* FORMULARIOS E INPUTS */
+        .input-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
 
-</style>
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            font-size: 14px;
+            color: var(--texto-oscuro);
+        }
 
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #dddddd;
+            border-radius: 10px; /* Inputs redondeados */
+            box-sizing: border-box;
+            font-size: 16px;
+            color: var(--texto-oscuro);
+            outline: none;
+        }
+
+        input::placeholder {
+            color: #b0b0b0;
+        }
+
+        /* BOTONES EXACTOS */
+        button, .btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 12px; /* Botones redondeados */
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.3s;
+            display: block;
+            text-decoration: none;
+            box-sizing: border-box;
+        }
+
+        /* Botón Rojo Principal */
+        .btn-main {
+            background-color: var(--rojo-cailewey);
+            color: var(--blanco);
+            margin-top: 20px;
+        }
+
+        .btn-main:hover {
+            background-color: #b71c1c;
+        }
+
+        /* Botón Blanco con Borde Rojo */
+        .btn-outline {
+            background-color: var(--blanco);
+            border: 1.5px solid var(--rojo-cailewey);
+            color: var(--rojo-cailewey);
+            margin-top: 15px;
+        }
+
+        .btn-outline:hover {
+            background-color: #fff8f8;
+        }
+
+        /* Botón Verde WhatsApp */
+        .btn-whatsapp {
+            background-color: var(--verde-whatsapp);
+            color: var(--blanco);
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* LINKS */
+        .footer-links {
+            margin-top: 25px;
+            font-size: 14px;
+        }
+
+        .footer-links a {
+            color: #1877f2; /* Azul tipo Facebook */
+            text-decoration: none;
+            cursor: pointer;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        /* ELEMENTOS DE SOCIO Y PEDIDO */
+        .status-badge {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+            padding: 10px;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 14px;
+            margin: 15px 0;
+            display: inline-block;
+        }
+
+        .opcion-pedido {
+            text-align: left;
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            border: 1px solid transparent;
+        }
+
+        .opcion-pedido:hover {
+            border-color: var(--rojo-cailewey);
+        }
+
+        .opcion-pedido input {
+            width: auto;
+            margin-right: 15px;
+            transform: scale(1.4);
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+
+        .aviso-ubicacion {
+            background-color: #fffde7;
+            border: 1px dashed #fbc02d;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 14px;
+            color: #5d4037;
+            margin-top: 15px;
+            line-height: 1.4;
+            text-align: left;
+        }
+    </style>
 </head>
-
 <body>
 
-<header>
-Cailewey Asistencia Vial para Motocicletas
-</header>
+<div class="card">
+    <div class="logo-container">
+        <span class="logo-moto">🏍️</span>
+        <h1 class="brand-name">Cailewey</h1>
+    </div>
+    <p class="subtitle">Asistencia Vial Tlajomulco</p>
 
-<div class="container">
+    <div id="sec-login">
+        <div class="input-group">
+            <label>Teléfono (Usuario)</label>
+            <input type="text" id="userLogin" placeholder="33XXXXXXXX">
+        </div>
+        <div class="input-group">
+            <label>Contraseña</label>
+            <input type="password" id="passLogin" placeholder="••••••••">
+        </div>
+        <button class="btn-main" onclick="validarLogin()">Entrar a mi Cuenta</button>
+        
+        <div class="footer-links">
+            <a onclick="verSeccion('sec-olvido')">¿Olvidaste tu contraseña?</a>
+            <button class="btn-outline" onclick="verSeccion('sec-registro')">Crear Cuenta Nueva</button>
+        </div>
+    </div>
 
-<!-- LOGIN -->
+    <div id="sec-registro" class="hidden">
+        <h3>Nuevo Registro</h3>
+        <form action="https://script.google.com/macros/s/AKfycbxgwpebtef9b0yTsC4XUfIhvHayqRNuAw4gerkBuS2Gf9kLbrQPB3GKi3ggg13x0LtG/exec" method="POST">
+            <div class="input-group">
+                <label>Nombre Completo</label>
+                <input type="text" name="nombre" placeholder="Ej. Juan Pérez" required>
+            </div>
+            <div class="input-group">
+                <label>Teléfono (WhatsApp)</label>
+                <input type="tel" name="telefono" placeholder="33XXXXXXXX" required>
+            </div>
+            <div class="input-group">
+                <label>Crea tu Contraseña</label>
+                <input type="password" name="password" placeholder="Mínimo 6 caracteres" required>
+            </div>
+            <div class="input-group">
+                <label>Elige tu Plan</label>
+                <select name="plan">
+                    <option value="Plan 125">Plan 125 - $50/mes</option>
+                    <option value="Plan 150">Plan 150 - $75/mes</option>
+                    <option value="Plan 250">Plan 250 - $95/mes</option>
+                </select>
+            </div>
+            <button type="submit" class="btn-main">Registrarme Ahora</button>
+        </form>
+        <button class="btn-outline" onclick="verSeccion('sec-login')">Volver al Inicio</button>
+    </div>
 
-<div id="login">
+    <div id="sec-olvido" class="hidden">
+        <h3>Recuperar Acceso</h3>
+        <p style="font-size:14px; color:var(--texto-suave); margin-bottom: 20px;">Ingresa tu teléfono y te contactaremos por WhatsApp.</p>
+        <div class="input-group">
+            <label>Número de Teléfono</label>
+            <input type="tel" id="telRecupera" placeholder="33XXXXXXXX">
+        </div>
+        <button class="btn-main" onclick="window.location.href='https://wa.me/523319053634?text=Hola,%20olvidé%20mi%20clave%20de%20socio'">Solicitar por WhatsApp</button>
+        <button class="btn-outline" onclick="verSeccion('sec-login')">Volver</button>
+    </div>
 
-<h2>Iniciar sesión</h2>
+    <div id="sec-socio" class="hidden">
+        <h2 style="color:var(--rojo-cailewey); margin:0;">¡Bienvenido Socio!</h2>
+        <div class="status-badge">● CUENTA ACTIVA</div>
+        <div style="text-align:left; font-size:14px; background-color:#f9f9f9; padding:15px; border-radius:12px; margin-top:10px;">
+            🏁 <b>Zona:</b> Tlajomulco de Zúñiga<br>
+            ⛽ <b>Gasolina:</b> Incluida en plan<br>
+            🚛 <b>Remolque:</b> Grúa disponible
+        </div>
+        <button class="btn-main" style="background-color:var(--rojo-cailewey); margin-top:25px;" onclick="verSeccion('sec-pedido')">🛠️ SOLICITAR ASISTENCIA</button>
+        <button class="btn-outline" onclick="location.reload()" style="margin-top:20px;">Cerrar Sesión</button>
+    </div>
 
-<input id="loginTelefono" placeholder="Telefono">
-<input id="loginPassword" type="password" placeholder="Contraseña">
+    <div id="sec-pedido" class="hidden">
+        <h3 style="color:var(--rojo-cailewey)">¿Qué necesitas hoy?</h3>
+        
+        <div class="opcion-pedido" onclick="this.querySelector('input').click()"><input type="checkbox" class="serv-check" value="Gasolina"> ⛽ Gasolina</div>
+        <div class="opcion-pedido" onclick="this.querySelector('input').click()"><input type="checkbox" class="serv-check" value="Ponchadura"> 🛞 Ponchadura</div>
+        <div class="opcion-pedido" onclick="this.querySelector('input').click()"><input type="checkbox" class="serv-check" value="Remolque"> 🚛 Remolque (Grúa)</div>
+        <div class="opcion-pedido" onclick="this.querySelector('input').click()"><input type="checkbox" class="serv-check" value="Falla Mecánica"> 🛠️ Falla Mecánica</div>
 
-<button onclick="login()">Entrar</button>
+        <div class="aviso-ubicacion">
+            <b>📍 PASO FINAL:</b><br>
+            Al presionar el botón se abrirá WhatsApp. Envía el mensaje y <b>mándanos tu ubicación real</b> con el icono del clip 📎.
+        </div>
 
-<br><br>
-
-<button onclick="mostrarRegistro()">Crear Cuenta</button>
-<button onclick="mostrarRecuperar()">Olvidé contraseña</button>
-
+        <button class="btn-whatsapp" onclick="enviarPedidoWhatsApp()">📲 CONFIRMAR Y ENVIAR</button>
+        <button class="btn-outline" onclick="verSeccion('sec-socio')">Atrás</button>
+    </div>
 </div>
 
-<!-- REGISTRO -->
+<script>
+    // FUNCIÓN PARA CAMBIAR DE SECCIÓN (Navegación interna)
+    function verSeccion(idSeccion) {
+        // Ocultar todas las secciones
+        document.getElementById('sec-login').classList.add('hidden');
+        document.getElementById('sec-registro').classList.add('hidden');
+        document.getElementById('sec-olvido').classList.add('hidden');
+        document.getElementById('sec-socio').classList.add('hidden');
+        document.getElementById('sec-pedido').classList.add('hidden');
+        
+        // Mostrar la sección deseada
+        document.getElementById(idSeccion).classList.remove('hidden');
+        
+        // Subir al inicio de la tarjeta (para móviles)
+        window.scrollTo(0, 0);
+    }
 
-<div id="registro" class="hidden">
+    // FUNCIÓN DE LOGIN (Simulada)
+    function validarLogin() {
+        var u = document.getElementById('userLogin').value;
+        var p = document.getElementById('passLogin').value;
+        
+        if(u !== "" && p !== "") {
+            // Si hay datos, pasamos a la vista de Socio
+            verSeccion('sec-socio');
+        } else {
+            alert("Por favor ingresa tu teléfono y contraseña.");
+        }
+    }
 
-<h2>Registro</h2>
+    // FUNCIÓN PARA ENVIAR EL PEDIDO POR WHATSAPP
+    function enviarPedidoWhatsApp() {
+        var checks = document.querySelectorAll('.serv-check:checked');
+        var serviciosSeleccionados = [];
+        
+        checks.forEach((check) => {
+            serviciosSeleccionados.push(check.value);
+        });
 
-<input id="nombre" placeholder="Nombre">
-<input id="telefono" placeholder="Telefono">
-<input id="password" type="password" placeholder="Contraseña">
+        if(serviciosSeleccionados.length === 0) {
+            alert("Por favor selecciona al menos un servicio.");
+            return;
+        }
 
-<select id="plan">
+        // Construir el mensaje de WhatsApp
+        var mensaje = "¡Hola Cailewey! Soy SOCIO ACTIVO y necesito asistencia urgente.%0A%0A" + 
+                      "*Servicios requeridos:*%0A- " + serviciosSeleccionados.join("%0A- ") + 
+                      "%0A%0A📍 *A continuación te comparto mi ubicación exacta...*";
+        
+        // Número de teléfono de destino (Cailewey)
+        var telefonoDestino = "523319053634";
+        
+        // Redirigir a WhatsApp
+        window.location.href = "https://wa.me/" + telefonoDestino + "?text=" + mensaje;
+    }
+</script>
 
-<option>Plan 125 ($50 mensual)</option>
-<option>Plan 150 ($75 mensual)</option>
-<option>Plan 250 ($95 mensual)</option>
-
-</select>
-
-<button onclick="registrar()">Registrar</button>
-<button onclick="volver()">Volver</button>
-
-</div>
-
-<!-- RECUPERAR -->
-
-<div id="recuperar" class="hidden">
-
-<h2>Recuperar contraseña</h2>
-
-<input id="telefonoRecuperar" placeholder="Telefono">
-<input id="nuevoPassword" type="password" placeholder="Nueva contraseña">
-
-<button onclick="recuperar()">Cambiar contraseña</button>
-<button onclick="volver()">Volver</button>
-
-</div>
-
-<!-- PANEL CLIENTE -->
-
-<div id="panel" class="hidden">
-
-<h2
+</body>
+</html>
