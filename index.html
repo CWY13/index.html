@@ -48,8 +48,8 @@ display:none;
 }
 
 .plan{
-border:1px solid #555;
-padding:15px;
+border:1px solid #444;
+padding:10px;
 margin:10px;
 border-radius:10px;
 }
@@ -98,15 +98,13 @@ Cailewey Asistencia Vial para Motocicletas
 
 <input id="password" type="password" placeholder="Contraseña">
 
-<h3>Selecciona Plan</h3>
-
 <select id="plan">
 
-<option>Plan 125 - $50 mensual</option>
+<option>Plan 125 ($50 mensual)</option>
 
-<option>Plan 150 - $75 mensual</option>
+<option>Plan 150 ($75 mensual)</option>
 
-<option>Plan 250 - $95 mensual</option>
+<option>Plan 250 ($95 mensual)</option>
 
 </select>
 
@@ -116,7 +114,7 @@ Cailewey Asistencia Vial para Motocicletas
 
 </div>
 
-<!-- RECUPERAR -->
+<!-- RECUPERAR PASSWORD -->
 
 <div id="recuperar" class="hidden">
 
@@ -126,7 +124,7 @@ Cailewey Asistencia Vial para Motocicletas
 
 <input id="nuevoPassword" type="password" placeholder="Nueva contraseña">
 
-<button onclick="recuperar()">Cambiar contraseña</button>
+<button onclick="recuperar()">Actualizar contraseña</button>
 
 <button onclick="volver()">Volver</button>
 
@@ -136,9 +134,7 @@ Cailewey Asistencia Vial para Motocicletas
 
 <div id="panel" class="hidden">
 
-<h2>Panel Cliente</h2>
-
-<p>Solicitar asistencia</p>
+<h2>Solicitar asistencia</h2>
 
 <select id="servicio">
 
@@ -146,7 +142,7 @@ Cailewey Asistencia Vial para Motocicletas
 
 <option>Aceite</option>
 
-<option>Parche llanta</option>
+<option>Parche</option>
 
 <option>Accesorio</option>
 
@@ -154,7 +150,7 @@ Cailewey Asistencia Vial para Motocicletas
 
 </select>
 
-<input id="ubicacion" placeholder="Ubicación o referencia">
+<input id="ubicacion" placeholder="Ubicación automática">
 
 <button onclick="asistencia()">Pedir asistencia</button>
 
@@ -203,7 +199,6 @@ password:document.getElementById("password").value,
 plan:document.getElementById("plan").value
 
 })
-
 })
 
 alert("Cuenta creada")
@@ -230,7 +225,6 @@ telefono:document.getElementById("telefonoRecuperar").value,
 password:document.getElementById("nuevoPassword").value
 
 })
-
 })
 
 alert("Contraseña actualizada")
@@ -250,7 +244,6 @@ servicio:document.getElementById("servicio").value,
 ubicacion:document.getElementById("ubicacion").value
 
 })
-
 })
 
 alert("Asistencia solicitada")
@@ -260,6 +253,20 @@ alert("Asistencia solicitada")
 function logout(){
 
 location.reload()
+
+}
+
+if (navigator.geolocation){
+
+navigator.geolocation.getCurrentPosition(function(pos){
+
+let lat = pos.coords.latitude
+let lon = pos.coords.longitude
+
+document.getElementById("ubicacion").value =
+lat + "," + lon
+
+})
 
 }
 
